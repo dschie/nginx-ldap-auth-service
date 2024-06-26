@@ -86,11 +86,19 @@ class UserManager:
         """
         if not self.pool:
             await self.create_pool()
-        dn = '{}={},{}'.format(
-            self.settings.ldap_username_attribute,
-            username,
-            self.settings.ldap_basedn
-        )
+        if(self.settings.ldap_authstyle.lower()=="dn"):
+            dn = '{}={},{}'.format(
+                self.settings.ldap_username_attribute,
+                username,
+                self.settings.ldap_basedn
+            )
+        elif (self.settings.ldap_authstyle.lower()=="windows"):
+            dn = '{}@{}'.format(
+                username,
+                self.settings.ldap_binddn.split('@')[1] # domain part of user@domain
+            )
+        else:
+            raise ValueError("Invalid ldap_authstyle")
         client = self.client()
         client.set_credentials("SIMPLE", user=dn, password=password)
         try:

@@ -23,6 +23,7 @@ os.environ['LDAP_BINDDN'] = 'cn=admin,dc=example,dc=com'
 os.environ['LDAP_PASSWORD'] = 'password'
 os.environ['LDAP_BASEDN'] = 'dc=example,dc=com'
 os.environ['SECRET_KEY'] = 'my-key'
+os.environ['LDAP_AUTHSTYLE'] = 'DN'
 
 # -- Project information -----------------------------------------------------
 

@@ -77,6 +77,8 @@ class Settings(BaseSettings):
     ldap_disable_referrals: bool = False
     #: The base DN under which to perform searches
     ldap_basedn: str
+    #: style of user authentication DN or Windows style
+    ldap_authstyle: str
     #: The LDAP attribute to use as the username when searching for a user
     ldap_username_attribute: str = 'uid'
     #: The LDAP attribute to use as the full name when getting search results
