@@ -8,6 +8,8 @@ except ImportError:
 
 
 class Settings(BaseSettings):
+    # make sure docker secrets can be used
+    model_config = SettingsConfigDict(secrets_dir='/run/secrets')
 
     # ==================
     # Logging
@@ -123,8 +125,6 @@ class Settings(BaseSettings):
     #: The sentry DSN to use for error reporting.  If this is ``None``, no
     #: error reporting will be done.
     sentry_url: Optional[str] = None
-
-    model_config = SettingsConfigDict()
 
     @model_validator(mode='after')  #: type: ignore
     def redis_url_required_if_session_type_is_redis(self):
